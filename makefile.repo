@@ -1,19 +1,20 @@
+start:
+	go build -o ./exe/main.exe && .\exe\main.exe
 migrate_up:
 	migrate -path db/migration -database "$(DB_URL)" -verbose up
-
 migrate_down:
 	migrate -path db/migration -database "$(DB_URL)" -verbose down
-
 sqlc:
 	sqlc generate
-
 simple_test:
 	go test ./...
-
 test:
 	go test -v ./...
-
 test_coverage:
 	go test -coverpkg=./... ./...
+dev:
+	go run main.go
+mock:
+	mockgen -destination db/mock/store.go simple_bank/db/myDb Store
 
-.PHONY: migrate_up migrate_down sqlc simple_test test test_coverage
+.PHONY: start migrate_up migrate_down sqlc simple_test test test_coverage dev mock

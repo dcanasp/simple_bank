@@ -1,4 +1,4 @@
-package myDb
+package myDb_test
 
 import (
 	"context"
@@ -12,8 +12,9 @@ import (
 )
 
 func createRandomAccount(t *testing.T) myDb.Account {
+	user := createRandomUser(t)
 	arg := myDb.CreateAccountParams{
-		Owner:    util.RandomOwner(),
+		Owner:    user.Username,
 		Balance:  util.RandomMoney(),
 		Currency: util.RandomCurrency(),
 	}

@@ -1,4 +1,4 @@
-package myDb
+package myDb_test
 
 import (
 	"context"
