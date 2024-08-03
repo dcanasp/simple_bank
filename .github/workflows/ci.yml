@@ -55,15 +55,17 @@ jobs:
   
     - name: add env
       run: |
-        echo ${{ secrets.APP_ENV }} | sed 's/./& /g'
-        echo ${{ secrets.APP_ENV }} > app.env
+        echo "${{ secrets.APP_ENV }}" | sed 's/./& /g'
+        echo "${{ secrets.APP_ENV }}" > app.env
         ls
         
     - name: Debug env variables
       run: |
         echo "DB_URL=${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/${{ secrets.POSTGRES_DB }}"
         echo "Contents of app.env:"
+        cat app.env
         cat app.env | sed 's/./& /g'
+        echo "AFTER FILE"
 
     - name: Set environment variables
       run: |
