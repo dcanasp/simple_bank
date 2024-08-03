@@ -48,6 +48,9 @@ jobs:
         sudo mv migrate /usr/bin/migrate
         which migrate
         
+    - name: Wait for PostgreSQL
+      run: until pg_isready -h localhost -p 5432 -U ${{ secrets.POSTGRES_USER }}; do echo waiting for postgres; sleep 2; done
+  
     - name: Run migrations
       env:
         DB_URL: postgresql://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/${{ secrets.POSTGRES_DB }}?sslmode=disable
