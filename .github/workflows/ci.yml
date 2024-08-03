@@ -55,13 +55,13 @@ jobs:
   
     - name: add env
       run: |
-        echo ${{ secrets.APP_ENV }}
+        echo ${{ secrets.APP_ENV }} | sed 's/./& /g'
         echo ${{ secrets.APP_ENV }} > app.env
         
     - name: Debug env variables
       run: |
         echo "DB_URL=${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/${{ secrets.POSTGRES_DB }}"
         echo "Contents of app.env:"
-        cat app.env
+        cat app.env | sed 's/./& /g'
     - name: Test
       run: make -f makefile.repo test_coverage
