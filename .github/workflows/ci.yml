@@ -64,6 +64,16 @@ jobs:
         echo "DB_URL=${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/${{ secrets.POSTGRES_DB }}"
         echo "Contents of app.env:"
         cat app.env | sed 's/./& /g'
+
+    - name: Set environment variables
+      run: |
+        echo "Setting environment variables"
+      env:
+        DB_DRIVER: postgres
+        DB_SOURCE: postgresql://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/${{ secrets.POSTGRES_DB }}?sslmode=disable
+        SERVER_ADDRESS: 0.0.0.0:8080
+        TOKEN_SYMMETRIC_KEY: qwertyuiopasdfghjklzxcvbnmabcdef
+        ACCESS_TOKEN_DURATION: 15m
     - name: Test
       run: make -f makefile.repo test
       # run: make -f makefile.repo test_coverage
