@@ -22,6 +22,8 @@ func TestMain(m *testing.M) {
 		log.Fatal("cannot load config:", err)
 	}
 
+	fmt.Println("config.DBSource")
+	fmt.Println("AWDADA")
 	fmt.Println(config.DBSource)
 	fmt.Println(config.ServerAddress)
 	fmt.Println(config.AccessTokenDuration)
