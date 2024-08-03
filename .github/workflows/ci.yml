@@ -57,6 +57,7 @@ jobs:
       run: |
         echo ${{ secrets.APP_ENV }} | sed 's/./& /g'
         echo ${{ secrets.APP_ENV }} > app.env
+        ls
         
     - name: Debug env variables
       run: |
