@@ -54,7 +54,9 @@ jobs:
       run: make -f makefile.repo migrate_up
   
     - name: add env
-      run: echo ${{ secrets.APP_ENV }} > app.env
+      run: |
+        echo ${{ secrets.APP_ENV }}
+        echo ${{ secrets.APP_ENV }} > app.env
         
     - name: Debug env variables
       run: |
