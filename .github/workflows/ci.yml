@@ -53,5 +53,8 @@ jobs:
         DB_URL: postgresql://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/${{ secrets.POSTGRES_DB }}?sslmode=disable
       run: make -f makefile.repo migrate_up
   
+    - name: add env
+      run: echo ${{ secrets.APP_ENV }} > app.env
+        
     - name: Test
       run: make -f makefile.repo test_coverage
