@@ -65,4 +65,5 @@ jobs:
         echo "Contents of app.env:"
         cat app.env | sed 's/./& /g'
     - name: Test
-      run: make -f makefile.repo test_coverage
+      run: make -f makefile.repo test
+      # run: make -f makefile.repo test_coverage
