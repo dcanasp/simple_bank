@@ -2,7 +2,6 @@ package myDb_test
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"os"
 	"simple_bank/db/myDb"
@@ -21,12 +20,6 @@ func TestMain(m *testing.M) {
 	if err != nil {
 		log.Fatal("cannot load config:", err)
 	}
-
-	fmt.Println("config.DBSource")
-	fmt.Println("AWDADA")
-	fmt.Println(config.DBSource)
-	fmt.Println(config.ServerAddress)
-	fmt.Println(config.AccessTokenDuration)
 
 	testDB, err = pgxpool.New(context.Background(), config.DBSource)
 	if err != nil {
