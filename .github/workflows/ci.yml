@@ -54,28 +54,8 @@ jobs:
       run: make -f makefile.repo migrate_up
   
     - name: add env
-      run: |
-        echo "${{ secrets.APP_ENV }}" | sed 's/./& /g'
-        echo "${{ secrets.APP_ENV }}" > app.env
-        ls
-        
-    - name: Debug env variables
-      run: |
-        echo "DB_URL=${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/${{ secrets.POSTGRES_DB }}"
-        echo "Contents of app.env:"
-        cat app.env
-        cat app.env | sed 's/./& /g'
-        echo "AFTER FILE"
-
-    - name: Set environment variables
-      run: |
-        echo "Setting environment variables"
-      env:
-        DB_DRIVER: postgres
-        DB_SOURCE: postgresql://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/${{ secrets.POSTGRES_DB }}?sslmode=disable
-        SERVER_ADDRESS: 0.0.0.0:8080
-        TOKEN_SYMMETRIC_KEY: qwertyuiopasdfghjklzxcvbnmabcdef
-        ACCESS_TOKEN_DURATION: 15m
+      run: echo "${{ secrets.APP_ENV }}" > app.env
+    
     - name: Test
       run: make -f makefile.repo test
       # run: make -f makefile.repo test_coverage
